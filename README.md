@@ -30,6 +30,11 @@
     			\App\Models\AdminUser::class
     		]
     	];
+    	
+5:运行迁移
+
+    php artisan migrate
+    
 这样就配置完成，系统会自动记录模型的增删改行为
     	
 # 使用
