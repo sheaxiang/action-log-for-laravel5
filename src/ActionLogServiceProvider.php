@@ -45,8 +45,8 @@ class ActionLogServiceProvider extends ServiceProvider
 					ActionLog::createActionLog('add',"添加的id:".$data->id, $guard);
 				});
 
-				(new $model)::deleted(function($data){
-					ActionLog::createActionLog('delete',"删除的id:".$data->id);
+				(new $model)::deleted(function($data) use ($guard){
+					ActionLog::createActionLog('delete',"删除的id:".$data->id, $guard);
 				});
 			}
 		}
