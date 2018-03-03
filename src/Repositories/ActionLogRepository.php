@@ -9,16 +9,19 @@ class ActionLogRepository {
 	 * 记录用户操作日志
 	 * @param $type
 	 * @param $content
-	 * @return bool
+	 * @param string $guard
+	 * @return mixed
 	 */
-    public function createActionLog($type,$content)
+    public function createActionLog($type, $content, $guard = 'api')
     {
     	$actionLog = new \SheaXiang\ActionLog\Models\ActionLog();
-    	if(auth()->check()){
-    		$actionLog->uid = auth()->user()->id;
-    		$actionLog->username = auth()->user()->name;
+    	if(auth("$guard")->check()){
+			$actionLog->guard = $guard;
+    		$actionLog->user_id = auth("$guard")->user()->id;
+    		$actionLog->username = auth("$guard")->user()->name;
     	}else{
-    		$actionLog->uid=0;
+			$actionLog->guard = null;
+    		$actionLog->user_id= null;
     		$actionLog->username ="访客";
     	}
        	$actionLog->browser = clientService::getBrowser($_SERVER['HTTP_USER_AGENT'],true);

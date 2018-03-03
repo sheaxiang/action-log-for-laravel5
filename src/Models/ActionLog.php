@@ -5,7 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActionLog extends Model {
 
-    protected $table = "action_log";
-
-    protected $fillable = ['uid','username','type','ip','content'];
+	/**
+	 * @var array
+	 */
+	protected $fillable = ['user_id','username','type','ip','content'];
 }

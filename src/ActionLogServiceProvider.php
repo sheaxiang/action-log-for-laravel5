@@ -2,6 +2,7 @@
 namespace SheaXiang\ActionLog;
 
 use Illuminate\Support\ServiceProvider;
+use SheaXiang\ActionLog\Facades\ActionLog;
 
 class ActionLogServiceProvider extends ServiceProvider
 {
@@ -19,7 +20,7 @@ class ActionLogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Publish configuration files
+        // Publish files
 
         $this->publishes([
             __DIR__.'/migrations' => database_path('migrations'),
@@ -30,26 +31,25 @@ class ActionLogServiceProvider extends ServiceProvider
             __DIR__.'/config/actionlog.php' => config_path('actionlog.php'),
         ], 'config');
 
-        $model = config("actionlog");
-		if($model){
-			foreach($model as $k => $v) {
-				
-			$v::updated(function($data){
-					ActionLog::createActionLog('update',"更新的id:".$data->id);
-				});
-			
-			$v::saved(function($data){
-				ActionLog::createActionLog('add',"添加的id:".$data->id);
-			});
-			
-			$v::deleted(function($data){
-				ActionLog::createActionLog('delete',"删除的id:".$data->id);
+        $action_log_config = config("actionlog");
+		$models = $action_log_config['model'];
+		$guard = $action_log_config['guard'];
 
-			});
-			
+		if($models){
+			foreach($models as $k => $model) {
+				(new $model)::updated(function($data) use ($guard){
+					ActionLog::createActionLog('update',"更新的id:".$data->id, $guard);
+				});
+
+				(new $model)::saved(function($data) use ($guard){
+					ActionLog::createActionLog('add',"添加的id:".$data->id, $guard);
+				});
+
+				(new $model)::deleted(function($data){
+					ActionLog::createActionLog('delete',"删除的id:".$data->id);
+				});
 			}
 		}
-
     }
 
     /**
