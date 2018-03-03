@@ -1,0 +1,22 @@
+{
+    "name": "sheaxiang/action-log",
+    "description": "actionlog for laravel",
+    "keywords": ["actionlog","laravel"],
+    "license": "MIT",
+    "authors": [
+        {
+          "name": "sheaxiang",
+          "email": "sheaxiang@126.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+      "php": ">=5.5.9"
+    },
+    "autoload": {
+      "psr-4": {
+        "SheaXiang\\ActionLog\\": "src/"
+      }
+    }
+}
