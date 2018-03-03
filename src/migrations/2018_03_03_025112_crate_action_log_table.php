@@ -34,6 +34,6 @@ class CrateActionLogTable extends Migration
      */
     public function down()
     {
-        Schema::drop('action_log');
+        Schema::drop('action_logs');
     }
 }
