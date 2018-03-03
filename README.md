@@ -6,4 +6,4 @@
 
 # 安装
 
-	composer require "sheaxiang/action-log:^1.0"
+	composer require "sheaxiang/action-log:^1.1"
