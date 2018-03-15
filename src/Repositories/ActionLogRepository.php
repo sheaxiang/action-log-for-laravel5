@@ -18,11 +18,9 @@ class ActionLogRepository {
     	if(auth("$guard")->check()){
 			$actionLog->guard = $guard;
     		$actionLog->user_id = auth("$guard")->user()->id;
-    		$actionLog->username = auth("$guard")->user()->name;
     	}else{
 			$actionLog->guard = null;
     		$actionLog->user_id= null;
-    		$actionLog->username ="访客";
     	}
        	$actionLog->browser = clientService::getBrowser($_SERVER['HTTP_USER_AGENT'],true);
        	$actionLog->system = clientService::getPlatForm($_SERVER['HTTP_USER_AGENT'],true);
