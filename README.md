@@ -6,7 +6,7 @@
 
 # 安装
 
-	composer require "sheaxiang/action-log:^1.1"
+	composer require "sheaxiang/action-log:^1.2"
 # 配置
 
 1：注册ServiceProvider：
